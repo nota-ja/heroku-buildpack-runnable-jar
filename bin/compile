@@ -40,7 +40,10 @@ fi
 
 cd $BUILD_DIR
 
-$BIN_DIR/download
+source $BUILD_DIR/manifest.sh
+if [[ -z $NO_DOWNLOAD ]]; then
+    $BIN_DIR/download
+fi
 if [[ -z $NO_PRE_DEPLOY ]]; then
   $BIN_DIR/pre-deploy
 fi
