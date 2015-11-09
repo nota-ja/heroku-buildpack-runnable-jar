@@ -5,6 +5,7 @@ startTime=$SECONDS
 
 # fail fast
 set -e
+set -x
 
 BP_DIR=$(cd $(dirname $0)/..; pwd) # absolute path
 BIN_DIR=$BP_DIR/bin
@@ -41,9 +42,12 @@ fi
 cd $BUILD_DIR
 
 $BIN_DIR/download
+echo 'finish download'
 if [[ -z $NO_PRE_DEPLOY ]]; then
+    echo 'start pre-deploy'
   $BIN_DIR/pre-deploy
 fi
+echo 'finish pre-deploy'
 
 duration=$(( SECONDS - startTime ))
 echo "-----> Finished after $duration seconds"
